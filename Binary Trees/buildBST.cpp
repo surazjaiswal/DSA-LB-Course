@@ -17,24 +17,22 @@ public:
 int getPredecessor(Node *root, int key);
 int getSucessor(Node *root, int key);
 
-Node *addNode(Node *root, int x)
+void addNode(Node *&root, int x)
 {
     if (root == NULL)
     {
         root = new Node(x);
-        return root;
     }
     else if (x < root->val)
     {
         cout << "left of " << root->val << endl;
-        root->left = addNode(root->left, x);
+        addNode(root->left, x);
     }
     else
     {
         cout << "right of " << root->val << endl;
-        root->right = addNode(root->right, x);
+        addNode(root->right, x);
     }
-    return root;
 }
 
 void takeInput(Node *&root)
@@ -44,7 +42,7 @@ void takeInput(Node *&root)
 
     while (x != -1)
     {
-        root = addNode(root, x);
+        addNode(root, x);
         cout << "added new node" << endl;
         cin >> x;
     }

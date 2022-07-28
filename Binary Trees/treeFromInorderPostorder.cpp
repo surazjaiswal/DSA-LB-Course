@@ -51,13 +51,13 @@ public:
     TreeNode *createTree(vector<int> inorder, vector<int> postorder)
     {
 
-        int postIdx = 0;         // postorder index
         int n = inorder.size(); // inorder start
+        int postIdx = n-1;         // postorder index
 
         for (int i = 0; i < n; i++)
             mp[inorder[i]] = i;
 
-        TreeNode *root = solve(inorder, postorder, 0, 0, n, n); // solve(inorder,postorder,postIdx,inStart,inEnd,n)
+        TreeNode *root = solve(inorder, postorder, n-1, 0, n-1, n); // solve(inorder,postorder,postIdx,inStart,inEnd,n)
 
         return root;
     }
@@ -72,8 +72,8 @@ public:
 
         TreeNode *node = new TreeNode(num);
         // in this case right part will be build first then left part, complimentary to postorder
-        node->right = solve(inorder, postorder, postIdx + 1, pos + 1, inEnd, n);
-        node->left = solve(inorder, postorder, postIdx + 1, inStart, pos - 1, n);
+        node->right = solve(inorder, postorder, postIdx - 1, pos + 1, inEnd, n);
+        node->left = solve(inorder, postorder, postIdx - 1, inStart, pos - 1, n);
 
         return node;
     }

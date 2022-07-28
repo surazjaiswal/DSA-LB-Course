@@ -127,11 +127,19 @@ public:
                     q.push(node->right);
                     flag = true;
                 }
+
+                if (mp[node] && !visited[mp[node]])
+                {
+                    visited[mp[node]] = true;
+                    q.push(mp[node]);
+                    flag = true;
+                }
             }
 
             if (flag)
                 ans++;
         }
+        return ans;
     }
 };
 
